@@ -17,14 +17,27 @@
         v-for="day in days"
         :key="day.name"
       >
-        <v-timeline :dense="$vuetify.breakpoint.xsOnly">
-          <time-item
-            v-for="(event, index) in day.events"
-            :key="index"
-            :event="event"
-            :index="index"
-          />
-        </v-timeline>
+        <v-layout
+          column
+          justify-center
+          align-center
+        >
+          <v-flex
+            xs12
+            sm8
+            md6
+          >
+            <item-image />
+            <v-timeline :dense="$vuetify.breakpoint.xsOnly">
+              <time-item
+                v-for="(event, index) in day.events"
+                :key="index"
+                :event="event"
+                :index="index"
+              />
+            </v-timeline>
+          </v-flex>
+        </v-layout>
       </v-tab-item>
     </v-tabs>
 
@@ -37,11 +50,13 @@
 <script>
 import data from '@/data'
 import TimeItem from '@/components/TimeItem'
+import ItemImage from '@/components/ItemImage'
 
 export default {
   name: 'Index',
   components: {
-    'time-item': TimeItem
+    'time-item': TimeItem,
+    'item-image': ItemImage
   },
   data () {
     return {
