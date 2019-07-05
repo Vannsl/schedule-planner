@@ -1,13 +1,74 @@
 <template>
-  
+    <v-timeline-item
+      :color="bubbleClassList"
+      fill-dot
+      :left="!isRight"
+      :right="isRight"
+    >
+      <template v-slot:opposite>
+        <span>
+          {{ $t(`days.${event.title}`) }}
+        </span>
+      </template>
+      <v-card>
+        <v-card-title
+          :class="event.color"
+          class="lighten-1"
+        >
+          <h2 class="display-1 white--text font-weight-light">
+            {{ $t(`days.${event.time}`) }}
+          </h2>
+        </v-card-title>
+        <v-container>
+          {{ $t(`days.${event.description}`) }}
+        </v-container>
+        <v-card-actions>
+          <v-btn
+            v-for="(action, index) in event.actions"
+            :key="index"
+            flat
+            color="orange"
+            :href="action.url"
+          >
+            {{ $t(`days.${action.label}`) }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-timeline-item>
 </template>
 
 <script>
 export default {
-
+  name: 'TimeItem',
+  data() {
+    return {
+      mobile: true,
+      justify: false,
+    }
+  },
+  props: ['event', 'index'],
+  mounted() {
+    this.onResize()
+    window.addEventListener('resize', this.onResize, { passive: true })
+  },
+  beforeDestroy() {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', this.onResize, { passive: true })
+    }
+  },
+  methods: {
+    onResize() {
+      this.isMobile = this.$vuetify.breakpoint.xsOnly
+      this.justify = this.$vuetify.breakpoint.smAndUp
+    }
+  },
+  computed: {
+    bubbleClassList() {
+      return `${this.event.color} lighten-1`;
+    },
+    isRight() {
+      return this.index % 2 === 0;
+    }
+  }
 }
 </script>
-
-<style>
-
-</style>

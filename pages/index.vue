@@ -6,10 +6,25 @@
       dark
       slider-color="yellow"
     >
-      <v-tab ripped>
-        Example
+      <v-tab
+        v-for="slug in slugs"
+        :key="slug"
+        ripped
+      >
+        {{ $t(`days.${slug}`) }}
       </v-tab>
-      <v-tab-item>
+      <v-tab-item
+        v-for="day in days"
+        :key="day.name"
+      >
+        <v-timeline :dense="$vuetify.breakpoint.xsOnly">
+          <time-item
+            v-for="(event, index) in day.events"
+            :key="index"
+            :event="event"
+            :index="index"
+          />
+        </v-timeline>
       </v-tab-item>
     </v-tabs>
 
@@ -20,8 +35,14 @@
 </template>
 
 <script>
+import data from '@/data'
+import TimeItem from '@/components/TimeItem'
+
 export default {
   name: 'Index',
+  components: {
+    'time-item': TimeItem
+  },
   data () {
     return {
       active: null,
@@ -36,11 +57,15 @@ export default {
   },
   computed: {
     buttonText() {
-      switch(this.active) {
-        case 0: return 'Zum Samstag'
-        case 1: return 'Zum Sonntag'
-        default: return 'Zum Freitag'
-      }
+      const index = this.active + 1 < this.days.length ? this.active + 1 : 0;
+      return `Go to ${this.days[index].name}`;
+    },
+    days() {
+      const { days } = data;
+      return days;
+    },
+    slugs() {
+      return this.days.map(day => (day.name));
     }
   }
 }
