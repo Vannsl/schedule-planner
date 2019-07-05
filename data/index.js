@@ -42,19 +42,13 @@ export default {
               label: "iceCreamMaker"
             }
           ],
-          color: "purple"
+          color: "cyan"
         },
         {
           title: "networking",
           time: "3pm",
           description: "fridaySecondEvent",
-          color: "amber"
-        },
-        {
-          title: "dinner",
-          time: "6pm",
-          description: "fridayThirdEvent",
-          color: "cyan"
+          color: "purple"
         }
       ]
     },
@@ -71,19 +65,25 @@ export default {
               label: "iceCreamMaker"
             }
           ],
-          color: "purple"
+          color: "amber"
         },
         {
           title: "networking",
           time: "3pm",
           description: "fridaySecondEvent",
-          color: "amber"
+          color: "purple"
         },
         {
           title: "dinner",
           time: "6pm",
           description: "fridayThirdEvent",
           color: "cyan"
+        },
+        {
+          title: "drinks",
+          time: "8pm",
+          description: "fridayFourthEvent",
+          color: "red"
         }
       ]
     }
