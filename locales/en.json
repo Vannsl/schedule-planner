@@ -1,0 +1,11 @@
+{
+  "home": {
+    "title": "Welcome",
+    "introduction": "This is an introduction in English."
+  },
+  "layout": {
+    "copy": "&copy; 2019 by <a href='https: //vannsl.io'>vannsl.io</a>",
+    "imprint": "Imprint",
+    "title": "Schedule Boilerplate"
+  }
+}
