@@ -40,26 +40,14 @@
 <script>
 export default {
   name: 'TimeItem',
-  data() {
-    return {
-      mobile: true,
-      justify: false,
-    }
-  },
-  props: ['event', 'index'],
-  mounted() {
-    this.onResize()
-    window.addEventListener('resize', this.onResize, { passive: true })
-  },
-  beforeDestroy() {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('resize', this.onResize, { passive: true })
-    }
-  },
-  methods: {
-    onResize() {
-      this.isMobile = this.$vuetify.breakpoint.xsOnly
-      this.justify = this.$vuetify.breakpoint.smAndUp
+  props: {
+    event: {
+      type: Object,
+      requires: true
+    },
+    index: {
+      type: Number,
+      required: true
     }
   },
   computed: {

@@ -2,6 +2,7 @@ export default {
   days: [
     {
       name: "friday",
+      img: "https://picsum.photos/800",
       events: [
         {
           title: "iceCream",
@@ -31,6 +32,7 @@ export default {
     },
     {
       name: "saturday",
+      img: "https://picsum.photos/400",
       events: [
         {
           title: "iceCream",
@@ -54,6 +56,7 @@ export default {
     },
     {
       name: "sunday",
+      img: "https://picsum.photos/600",
       events: [
         {
           title: "iceCream",

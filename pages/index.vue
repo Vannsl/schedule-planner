@@ -27,8 +27,12 @@
             sm8
             md6
           >
-            <item-image />
-            <v-timeline :dense="$vuetify.breakpoint.xsOnly">
+            <v-img
+              v-if="day.img"
+              aspect-ratio="2"
+              :src="day.img"
+            ></v-img>
+            <v-timeline :dense="dense">
               <time-item
                 v-for="(event, index) in day.events"
                 :key="index"
@@ -42,7 +46,9 @@
     </v-tabs>
 
     <div class="text-xs-center mt-3">
-      <v-btn @click="next">{{ buttonText }}</v-btn>
+      <v-btn @click="next">
+        {{ $t('home.goto', { day: days[nextIndex].name }) }}
+      </v-btn>
     </div>
   </div>
 </template>
@@ -50,30 +56,29 @@
 <script>
 import data from '@/data'
 import TimeItem from '@/components/TimeItem'
-import ItemImage from '@/components/ItemImage'
 
 export default {
   name: 'Index',
   components: {
-    'time-item': TimeItem,
-    'item-image': ItemImage
+    'time-item': TimeItem
   },
   data () {
     return {
-      active: null,
+      active: 0,
+      isHydrated: false
     }
   },
   methods: {
     next() {
-      const active = parseInt(this.active)
-      this.active = (active < 2 ? active + 1 : 0)
       window.scrollTo(0, 0)
+      this.$nextTick(() => {
+        this.active = this.nextIndex;
+      })
     }
   },
   computed: {
-    buttonText() {
-      const index = this.active + 1 < this.days.length ? this.active + 1 : 0;
-      return `Go to ${this.days[index].name}`;
+    nextIndex() {
+      return (this.active + 1) % this.days.length;
     },
     days() {
       const { days } = data;
@@ -81,7 +86,15 @@ export default {
     },
     slugs() {
       return this.days.map(day => (day.name));
+    },
+    dense() {
+      return this.isHydrated
+        ? this.$vuetify.breakpoint.xsOnly
+        : true
     }
+  },
+  mounted() {
+    this.isHydrated = true;
   }
 }
 </script>
