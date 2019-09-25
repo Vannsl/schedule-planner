@@ -10,7 +10,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Vannsl/schedule-planner.git"
+    "url": "https://git.sinnerschrader.com/vanboe/o2-manahau.git"
   },
   "scripts": {
     "test": "jest",
